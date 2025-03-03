@@ -4,3 +4,6 @@
 [submodule "poema"]
 	path = poema
 	url = https://github.com/goattwest/poema
+[submodule "DocumentacionMD"]
+	path = DocumentacionMD
+	url = https://github.com/goattwest/DocumentacionMD.git
