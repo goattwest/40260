@@ -31,10 +31,10 @@
 	<curso>4to</curso>
 </alumno>
 
-<alumno id="a3" edad="15" becado="si">
-	<nombre>Armin</nombre>
-	<apellido>Arlert</apellido>
-	<nacimiento>10/Noviembre/835</nacimiento>
+<alumno id="a3" edad="30" becado="si">
+	<nombre>Levi</nombre>
+	<apellido>Ackerman</apellido>
+	<nacimiento>12/Septiembre/820</nacimiento>
 	<curso>4to</curso>
 </alumno>
 </alumnos>
