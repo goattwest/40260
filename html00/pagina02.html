@@ -5,54 +5,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina 02</title>
-</head>
-
-
-<body>
     <style>
-        td, th{
+        td, th {
             padding: 10px;
             background-color: chartreuse;
             border-radius: 10%;
-            color: black
+            color: black;
+            text-align: center;
         }
-        body{
+        body {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh; /* altura del viewport */
             margin: 0;
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            width: auto;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
+</head>
 
-    <button id="BotonFuncion" name="BotonFuncion" onclick="loadXMLDoc()">Ejecutar función</button>
+<body>
 
+    <button id="BotonFuncion" onclick="loadXMLDoc()">Ejecutar función</button>
     <table id="demo"></table>
 
     <script>
-        function loadXMLDoc() {
-            document.getElementById("BotonFuncion").style.display= "none";
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload = function () {
-                const xmlDoc = xhttp.responseXML;
-                const al = xmlDoc.getElementsByTagName("alumno");
-                myFunction(al);
-            }
-            xhttp.open("GET", "alumnos.xml");
-            xhttp.send();
-        }
+        const loadXMLDoc = async () => {
+            try {
+                // Ocultar el botón al hacer clic
+                document.getElementById("BotonFuncion").style.display = "none";
 
-        function myFunction(al) {
-            let table = "<tr><th>Nombre</th><th>Nacimiento</th></tr>";
-            for (let i = 0; i < al.length; i++) {
-                table += "<tr><td>" +
-                    al[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue +
-                    "</td><td>" +
-                    al[i].getElementsByTagName("nacimiento")[0].childNodes[0].nodeValue +
-                    "</td></tr>";
+                const response = await fetch('cd_catalog.xml');
+                const text = await response.text();
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(text, "application/xml");
+
+                const cds = xmlDoc.getElementsByTagName("CD");
+                myFunction(cds);
+            } catch (error) {
+                console.error('Error loading XML:', error);
             }
+        };
+
+        const myFunction = (cds) => {
+            let table = "<tr><th>Artist</th><th>Title</th></tr>";
+            Array.from(cds).forEach(cd => {
+                const artist = cd.getElementsByTagName("ARTIST")[0]?.textContent || "N/A";
+                const title = cd.getElementsByTagName("TITLE")[0]?.textContent || "N/A";
+                table += `<tr><td>${artist}</td><td>${title}</td></tr>`;
+            });
             document.getElementById("demo").innerHTML = table;
-        }
+        };
     </script>
 
 </body>
