@@ -1,9 +1,5 @@
 *{
     box-sizing: border-box;
-    background-image: url('ruta/del/archivo.gif');
-    background-size: cover;         /* Cubre toda la pantalla */
-    background-repeat: no-repeat;   /* No se repite */
-    background-position: center;
 }
 
 body {
